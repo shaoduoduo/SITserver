@@ -1,0 +1,13 @@
+debug/MoveToThreadTest.o
+debug/Thread_MySQL.o
+debug/main.o
+debug/MainWindow.o
+debug/protocol.o
+debug/protocol_anodizing.o
+debug/Server.o
+debug/TcpClientSocket.o
+debug/moc_MainWindow.o
+debug/moc_MoveToThreadTest.o
+debug/moc_Thread_MySQL.o
+debug/moc_Server.o
+debug/moc_TcpClientSocket.o

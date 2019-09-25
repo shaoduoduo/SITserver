@@ -1,0 +1,37 @@
+﻿
+该工程为多线程启动结束测序功能，目前三线程启动结束工作优雅，未来多线程参考这个配置2019-9-5
+2019年9月9日 --开始使用git进行版本管理
+2019年9月11日 --取消死循环，改为定时器
+
+2019-9-20       copy from windos .change to server code
+
+delete some file
+
+2019-9-23
+
+move to computer ,edit it with sourcetree
+
+2019年9月24日
+
+服务器端从家里台式机调试好了	
+
+//32为编译器可以运行，64位不可以
+	
+//原因原来是void    Server::incomingConnection(qintptr socketDescriptor)原型已经改了，int在64位系统中是代表32位
+port:3306
+创建数据库	db_server
+创建MySQL username为 user_server 密码为“P@ssw0rd”
+权限为 INSERT SELECT SHOW UPDATE
+
+
+
+新建tables
+
+TB_ST_ALARM
+
+TB_ST_ANOD
+
+TB_ST_TC
+
+TB_ST_TEMP
+

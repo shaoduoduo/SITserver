@@ -1,0 +1,13 @@
+release/MoveToThreadTest.o
+release/Thread_MySQL.o
+release/main.o
+release/MainWindow.o
+release/protocol.o
+release/protocol_anodizing.o
+release/Server.o
+release/TcpClientSocket.o
+release/moc_MainWindow.o
+release/moc_MoveToThreadTest.o
+release/moc_Thread_MySQL.o
+release/moc_Server.o
+release/moc_TcpClientSocket.o
