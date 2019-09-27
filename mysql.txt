@@ -1,0 +1,56 @@
+--------------------------------------------------------------------------------------
+mysql> CREATE TABLE test_alarm
+    -> (
+    -> alarm_id  int  unsigned NULL  AUTO_INCREMENT,
+    -> date_client  DATE  NOT NULL,
+    -> time_client  TIME  NOT NULL,
+    -> status   char(5)  NULL,
+    -> msg   char(255)  NULL,
+    -> date_server  DATE  NOT NULL,
+    -> time_server  TIME  NOT NULL,
+    -> PRIMARY KEY (alarm_id)
+    -> )
+    -> ENGINE =InnoDB  DEFAULT CHARSET =utf8;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into test_alarm
+    -> (date_client,time_client,status,msg,date_server,time_server)
+    -> values
+    -> ("2019-9-25","8:2:37","Ac","test1",CURDATE(),CURTIME());     
+--------------------------------------------------------------------------------------
+
+mysql> CREATE TABLE  test_anod                                                                                                                  -> (
+    -> anod_id  int unsigned  NULL AUTO_INCREMENT,
+    -> anod_index  char(5)  NOT NULL,
+    -> date_client DATE  NOT NULL,
+    -> time_client TIME  NOT NULL,
+    -> I_PV char(20) NULL,
+    -> U_PV char(20) NULL,
+    -> I_SV char(20) NULL,
+    -> U_SV char(20) NULL,
+    -> PRIMARY KEY (anod_id)
+    -> )ENGINE = InnoDB DEFAULT  CHARSET =utf8;  
+
+
+mysql> insert into test_anod (anod_index ,date_client,time_client,I_PV,U_PV,I_SV,U_SV,date_server,time_server) values (2,"2019-9-25","16:47:50","10","10.3","20","30.5",CURDATE(),CURTIME());
+
+
+--------------------------------------------------------------------------------------
+mysql> CREATE TABLE  test_tc ( tc_id  int unsigned  NULL AUTO_INCREMENT, tc_index  char(5)  NOT NULL, date_client DATE  NOT NULL, time_client TIME  NOT NULL, no char(20) NULL, code char(50) NULL, pos char(20) NULL, action char(5) NULL,date_server DATE NOT NULL ,time_server TIME NOT NULL, PRIMARY KEY (tc_id) )ENGINE = InnoDB DEFAULT  CHARSET =utf8;
+
+
+
+mysql> insert into test_tc (tc_index ,date_client,time_client,no,code,date_server,time_server) values (1,"2019/9/26","9:50:20","AN","AN190823172189423",CURDATE(),CURTIME());
+
+
+--------------------------------------------------------------------------------------
+
+mysql> CREATE TABLE  test_temp ( temp_id  int unsigned  NULL AUTO_INCREMENT, date_client DATE  NOT NULL, time_client TIME  NOT NULL, A1 char(10) NULL, A3 char(10) NULL, A5 char(10) NULL, A7 char(10) NULL,A9  char(10) NULL,A11  char(10) NULL ,A13  char(10)  NULL,D1  char(5) NULL, D3  char(5) NULL,A16 char(5) NULL,A18  char(5) NULL,A20  char(5) NULL ,S1  char(5)  NULL ,S2 char(5)  NULL,S3  char(5)  NULL,date_server DATE NOT NULL ,time_server TIME NOT NULL, PRIMARY KEY (temp_id) )ENGINE = InnoDB DEFAULT  CHARSET =utf8;
+
+
+mysql> insert into test_temp (date_client,time_client,date_server,time_server) values ("2019/9/26","9:51:20",CURDATE(),CURTIME());
+
+
+
+
+

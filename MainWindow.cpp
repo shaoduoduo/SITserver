@@ -26,10 +26,8 @@ MainWindow::~MainWindow()
         closethread();
 
         delete      thread_mysql;
-
         delete      m_pTimer;
         delete      ui;
-
 }
     void MainWindow::threadFinished()
     {
@@ -66,20 +64,14 @@ void MainWindow::on_pushButton_stop_clicked()
 //关闭线程
  void MainWindow::closethread()
  {
-
-
      if(thread_mysql)
      {
          qDebug() << "线程有效，关闭线程thread_mysql " ;
          thread_mysql->stop();
          m_thread_sql.quit();
          m_thread_sql.wait();
-
          thread_mysql= NULL;
      }
-
-
-
  }
 
 

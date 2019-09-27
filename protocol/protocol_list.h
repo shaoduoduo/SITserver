@@ -66,6 +66,7 @@ enum PRO_INDEX_ANODIZE
     TCDATA1,
     TCDATA2,
     TEMPHIS,
+    HEART,//心跳数据
     FILENUM
 
 };
@@ -77,7 +78,7 @@ enum PROTOCOL_INDEX
     OPC,
     ARCSPRAY,
     OEE,
-    HEART,//心跳数据
+
     PROTOCOL_NUM
 };
 //协议顺序

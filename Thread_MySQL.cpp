@@ -14,12 +14,7 @@ Thread_MySQL::~Thread_MySQL()
 }
 void Thread_MySQL::doWork()
 {
-//    QString msg = QString("%1 -> %2 threadid:[%3]")
-//            .arg(__FILE__)
-//            .arg(__FUNCTION__)
-//            .arg((int)QThread::currentThreadId());
 
-//    qDebug() << msg;
 
     m_pTimer = new QTimer(this);
     connect(m_pTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
@@ -50,12 +45,6 @@ void Thread_MySQL::doWork()
 
 void Thread_MySQL::start()
 {
-//    QString msg = QString("%1 -> %2 threadid:[%3]")
-//            .arg(__FILE__)
-//            .arg(__FUNCTION__)
-//            .arg((int)QThread::currentThreadId());
-//    qDebug() << msg;
-
     doWork();
 
 
