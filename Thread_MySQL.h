@@ -6,8 +6,9 @@
 #include "MoveToThreadTest.h"
 #include    <protocol/protocol_anodizing.h>
 
-
-
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include    <QSqlError>
 #define TIMER_TIMEOUT   (5*1000)
 class Thread_MySQL : public MoveToThreadTest
 {
@@ -29,6 +30,10 @@ public slots:
     void    dealmesfrommain(QString s);
     void    deallistfromfile(QStringList s);
             void    handleTimeout();  //定时器超时处理函数
+
+private:
+            QSqlDatabase db;
+            bool MySQLFlag;
 };
 
 #endif // MYSQLTHREAD_H

@@ -27,6 +27,7 @@ port:3306
 
 新建tables
 
+
 TB_ST_ALARM
 
 TB_ST_ANOD
@@ -34,4 +35,7 @@ TB_ST_ANOD
 TB_ST_TC
 
 TB_ST_TEMP
+
+使用QT5.11可以访问数据库。5.13缺少库，无法使用，改为5.11编译
+
 
