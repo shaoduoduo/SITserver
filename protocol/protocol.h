@@ -1,10 +1,10 @@
 #ifndef MYPROTOCOL_H
 #define MYPROTOCOL_H
 
-#include <QString>
-
-#include "protocol_list.h"
-#include<QByteArray>
+#include    <QString>
+#include    <QStringList>
+#include    "protocol_list.h"
+#include    <QByteArray>
 
 
 //基本封装类，用于通用封装

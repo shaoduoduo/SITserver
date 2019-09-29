@@ -5,15 +5,16 @@
 
 //专用封装类。用于封装特定接口，增加特定参数属性
 
-class Ptotocol_Anodizing : public Myprotocol
+class Protocol_Anodizing : public Myprotocol
 {
 public:
-    Ptotocol_Anodizing();
+    Protocol_Anodizing(QStringList section);
 
-    QString str;
+
 
 private:
 //特定接口对应的参数
+    QStringList msg;
     int     ID;
     int Anodizing_UPV;
     int Anodizing_IPV;

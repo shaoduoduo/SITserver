@@ -4,6 +4,9 @@
 #include <QObject>
 #include    <QTcpServer>
 #include    <tcp_server/TcpClientSocket.h>
+#include    <QByteArray>
+
+#include "protocol/protocol_anodizing.h"
 
 class Server : public QTcpServer
 {
@@ -17,7 +20,8 @@ public:
 signals:
     void    updataServer(QString,int);
 
-
+private:
+    Protocol_Anodizing * pro_anodizing;
 
 public slots:
     void    updataClients(QString,int);
