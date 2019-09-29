@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_pTimer = new QTimer(this);
     connect(m_pTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
-    m_pTimer->start(TIMER_TIMEOUT);
+    m_pTimer->start(TIMER_TIMEOUT_MAIN);
 
 
 

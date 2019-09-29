@@ -16,7 +16,7 @@
 namespace Ui {
 class MainWindow;
 }
-#define TIMER_TIMEOUT   (5*1000)
+#define TIMER_TIMEOUT_MAIN   (5*1000)
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
