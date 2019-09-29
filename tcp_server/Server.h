@@ -7,12 +7,14 @@
 #include    <QByteArray>
 
 #include "protocol/protocol_anodizing.h"
-
+#include    <QTimer>
+#include    <QThread>
+#define  TIMER_TIMEOUT  5000
 class Server : public QTcpServer
 {
     Q_OBJECT
 public:
-    explicit Server(QObject *parent = nullptr,int port =0);
+    explicit Server(int port =0);
     ~Server();
 
     QList<TcpClientSocket*>tcpclientsocketList;
@@ -22,10 +24,16 @@ signals:
 
 private:
     Protocol_Anodizing * pro_anodizing;
-
+    QTimer *m_pTimer;//定时器
 public slots:
+     void doWork();
+     void start();
+     void stop();
+
+
     void    updataClients(QString,int);
     void    slotDisconnected(int);
+    void    handleTimeout();
 
 protected:
     void    incomingConnection(qintptr  socketDescriptor);

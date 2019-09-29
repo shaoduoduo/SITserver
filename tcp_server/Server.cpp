@@ -1,16 +1,40 @@
 #include "Server.h"
 
-Server::Server(QObject *parent,int port):QTcpServer (parent)
+Server::Server(int port)
 {
     listen(QHostAddress::Any,port);
+
+
 
 }
 
 Server::~Server()
 {
 
+    delete m_pTimer;
+}
+
+void Server::doWork()
+{
+
+
+    m_pTimer = new QTimer(this);
+    connect(m_pTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
+    m_pTimer->start(TIMER_TIMEOUT);
+}
+
+void Server::start()
+{
+    doWork();
 
 }
+
+void Server::stop()
+{
+
+}
+
+
 void    Server::incomingConnection(qintptr socketDescriptor)
 {
 
@@ -67,14 +91,6 @@ void Server::updataClients(QString   msg,int length)
  default:
      break;
  }
- //    for (int i=0;i<tcpclientsocketList.count();i++)
-//    {
-//        QTcpSocket  *item   =tcpclientsocketList.at(i);
-//        if(item->write(msg.toLatin1(),length)!=length)
-//        {
-//            continue;
-//        }
-//    }
 }
 
 void    Server::slotDisconnected(int    descriptor)
@@ -89,3 +105,18 @@ void    Server::slotDisconnected(int    descriptor)
         }
     }
 }
+
+
+void Server::handleTimeout()
+{
+//        QString msg = QString("%1 -> %2 threadid:[%3]")
+//                .arg(__FILE__)
+//                .arg(__FUNCTION__)
+//                .arg((uintptr_t)QThread::currentThreadId());
+//        qDebug() << msg;
+
+    if(m_pTimer->isActive()){
+        m_pTimer->start();
+    }
+}
+

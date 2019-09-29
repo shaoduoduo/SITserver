@@ -26,6 +26,7 @@ MainWindow::~MainWindow()
         closethread();
 
         delete      thread_mysql;
+        delete      server;
         delete      m_pTimer;
         delete      ui;
 }
@@ -56,7 +57,17 @@ void MainWindow::on_pushButton_stop_clicked()
 
      #endif
 
+
+         server  =   new Server(port);
+         server->moveToThread(&m_thread_server);
+         connect(&m_thread_server,&QThread::started,server,&Server::start);
+         connect(&m_thread_server,&QThread::finished,server,&Server::deleteLater);
+
+         connect(server,SIGNAL(updataServer(QString,int) ),this,SLOT(updataServer(QString,int) ));
+
+
              m_thread_sql.start();
+             m_thread_server.start();
           //   m_thread_fileread.start();
           //   m_thread_client.start();
  }
@@ -72,13 +83,21 @@ void MainWindow::on_pushButton_stop_clicked()
          m_thread_sql.wait();
          thread_mysql= NULL;
      }
+     if(server)
+         {
+         qDebug() << "线程有效，关闭线程server " ;
+//         server ->stop();
+         m_thread_server.quit();
+         m_thread_server.wait();
+         server = NULL;
+     }
  }
 
 
  void MainWindow::on_pushButton_start_clicked()
 {
         starthread();
-        slotCreateServer();//start server
+//        slotCreateServer();//start server
 
         ui->pushButton_start->setEnabled(false);
 
@@ -138,8 +157,8 @@ void MainWindow::Get_IP_Local(void)//get ip local
 
 void    MainWindow::slotCreateServer()
 {
-        server  =   new Server(this,port);
-        connect(server,SIGNAL(updataServer(QString,int) ),this,SLOT(updataServer(QString,int) ));
+//        server  =   new Server(this,port);
+//        connect(server,SIGNAL(updataServer(QString,int) ),this,SLOT(updataServer(QString,int) ));
 
 }
 
@@ -149,7 +168,7 @@ void    MainWindow::updataServer(QString msg,int length)
 {
 
     //server 收到信息
-    ui->textBrowser_server->setText(msg);
+    ui->textBrowser_server->append(msg);
     qDebug()<<"length === "<<length;
 
 }

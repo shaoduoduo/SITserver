@@ -2,13 +2,13 @@
 
 Thread_MySQL::Thread_MySQL(MoveToThreadTest *parent) : MoveToThreadTest(parent)
 {
-        m_bRun = true;
+//        m_bRun = true;
 }
 
 
 Thread_MySQL::~Thread_MySQL()
 {
-        db.close();
+         db.close();
          delete m_pTimer;
 
 }
@@ -68,11 +68,11 @@ void Thread_MySQL::stop()
 //    QString msg = QString("%1 -> %2 threadid:[%3]")
 //            .arg(__FILE__)
 //            .arg(__FUNCTION__)
-//            .arg((int)QThread::currentThreadId());
+//            .arg((QThread)QThread::currentThreadId());
 //    qDebug() << msg;
 
-    QMutexLocker locker(&m_Mutex);
-    m_bRun = false;
+//    QMutexLocker locker(&m_Mutex);
+//    m_bRun = false;
 }
 void    Thread_MySQL::dealmesfrommain(QString s)
 {

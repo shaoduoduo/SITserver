@@ -58,7 +58,7 @@ private:
 //tcp server
     int port;
     Server  *server;
-
+    QThread     m_thread_server;
 signals:
         void signalsendtoMysql(QString s);
 
