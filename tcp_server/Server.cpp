@@ -69,9 +69,10 @@ void    Server::incomingConnection(qintptr socketDescriptor)
 }
 void Server::updataClients(QString   msg,int length)
 {
+    QString str;
     //收到客户端上传数据
         emit    updataServer(msg,length);//service updata to mianwindow.cpp
-        qDebug()<<msg;
+  //      qDebug()<<msg;
     //"0,5,2019/8/24\t9:34:19\tDN\tDN19082409280001\t5\t0?"
      QStringList sections = msg.split(QRegExp("[,]")); //把每一个块装进一个QStringList中
     // ANODIZE,//阳极氧化数据
@@ -92,6 +93,7 @@ void Server::updataClients(QString   msg,int length)
                  }
                     pro_anodizing = new  Protocol_Anodizing(sections);
 
+
                     //deal data
 
                     //save data
@@ -99,6 +101,7 @@ void Server::updataClients(QString   msg,int length)
                     //release
                     delete  pro_anodizing;
                  break;
+
              default:
                  break;
      }

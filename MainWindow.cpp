@@ -11,14 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_pTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
     m_pTimer->start(TIMER_TIMEOUT_MAIN);
 
-
-
     port    =8888;
     ui->textEdit_port->setText(QString::number(port));
-
-
     Get_IP_Local();
-
 }
 
 MainWindow::~MainWindow()
@@ -33,10 +28,7 @@ MainWindow::~MainWindow()
     void MainWindow::threadFinished()
     {
 
-
     }
-
-
 //停止线程
 void MainWindow::on_pushButton_stop_clicked()
 {
@@ -56,15 +48,12 @@ void MainWindow::on_pushButton_stop_clicked()
   //       connect(this,SIGNAL(signalsendtoMysql(QString)),thread_mysql,SLOT(dealmesfrommain(QString)),Qt::QueuedConnection);
 
      #endif
-
-
          server  =   new Server(port);
          server->moveToThread(&m_thread_server);
          connect(&m_thread_server,&QThread::started,server,&Server::start);
          connect(&m_thread_server,&QThread::finished,server,&Server::deleteLater);
 
          connect(server,SIGNAL(updataServer(QString,int) ),this,SLOT(updataServer(QString,int) ));
-
 
              m_thread_sql.start();
              m_thread_server.start();
@@ -168,8 +157,8 @@ void    MainWindow::updataServer(QString msg,int length)
 {
 
     //server 收到信息
-    ui->textBrowser_server->append(msg);
-    qDebug()<<"length === "<<length;
+    ui->textBrowser_server->append(msg.toUtf8().data());
+ //   qDebug()<<"length === "<<length;
 
 }
 

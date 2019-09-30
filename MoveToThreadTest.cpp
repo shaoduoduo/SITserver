@@ -11,7 +11,6 @@ MoveToThreadTest::MoveToThreadTest(QObject *parent) : QObject(parent)
 
 MoveToThreadTest::~MoveToThreadTest()
 {
-
            // delete m_pTimer;
 }
 
