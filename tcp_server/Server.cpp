@@ -80,12 +80,12 @@ void Server::updataClients(QString   msg,int length)
     // OPC,
     // ARCSPRAY,
     // OEE,
-    if(sections.count()<2)//包数量不足
+    if(sections.count()<PRO_SIZE)//包数量不足2
         return;
-     switch (sections.at(0).toInt())
+     switch (sections.at(PRO_INDEX).toInt())
      {
              case ANODIZE://阳极氧化数据
-                 if(sections.at(1).toInt()== HEART)
+                 if(sections.at(PRO_ID).toInt()== HEART)
                  {
                     //收到HEART包
                         Flag_receive =true;

@@ -82,6 +82,16 @@ enum PROTOCOL_INDEX
 
     PROTOCOL_NUM
 };
+enum PROTOCOL
+{
+    PRO_INDEX,// PROTOCOL_INDEX
+    PRO_ID,
+    PRO_SIZE,
+    PRO_DATA,
+
+
+    PRO_NUM
+};
 //协议顺序
 //0               1:?   2                 3    4
 //PROTOCOL_INDEX,SIZE,PRO_INDEX_ANODIZE,DATA,CHECK
