@@ -21,7 +21,7 @@ public:
 
 signals:
     void    updataServer(QString,int);
-
+    void    updataSQL(QString);
 private:
     Protocol_Anodizing * pro_anodizing;
     QTimer *m_pTimer;//定时器

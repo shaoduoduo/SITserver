@@ -5,6 +5,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    thread_mysql = NULL;
+    server = NULL;
     ui->setupUi(this);
 
     m_pTimer = new QTimer(this);
@@ -14,6 +16,12 @@ MainWindow::MainWindow(QWidget *parent) :
     port    =8888;
     ui->textEdit_port->setText(QString::number(port));
     Get_IP_Local();
+
+    starthread();
+//        slotCreateServer();//start server
+
+    ui->pushButton_start->setEnabled(false);
+
 }
 
 MainWindow::~MainWindow()
@@ -55,7 +63,9 @@ void MainWindow::on_pushButton_stop_clicked()
 
          connect(server,SIGNAL(updataServer(QString,int) ),this,SLOT(updataServer(QString,int) ));
 
-             m_thread_sql.start();
+         connect(server,SIGNAL(updataSQL(QString)),thread_mysql,SLOT(dealstrfromserver(QString)));
+        connect(thread_mysql,SIGNAL(signalMySQL(QString)),this,SLOT(slotdealfromMysql(QString)));
+            m_thread_sql.start();
              m_thread_server.start();
           //   m_thread_fileread.start();
           //   m_thread_client.start();
@@ -162,3 +172,7 @@ void    MainWindow::updataServer(QString msg,int length)
 
 }
 
+void    MainWindow::slotdealfromMysql(QString str)
+{
+        ui->text_output->setText(str);
+}

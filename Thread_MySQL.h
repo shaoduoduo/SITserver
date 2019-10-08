@@ -18,17 +18,18 @@ public:
 ~Thread_MySQL();
 
                 QTimer *m_pTimer;//定时器
-
+                 void doWork();
+                 void start();
+                 void stop();
 signals:
-
+                 void  signalMySQL(QString);
 
 public slots:
-    virtual void doWork();
-    virtual void start();
-    virtual void stop();
+
 
     void    dealmesfrommain(QString s);
     void    deallistfromfile(QStringList s);
+    void    dealstrfromserver(QString);
             void    handleTimeout();  //定时器超时处理函数
 
 private:

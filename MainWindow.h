@@ -30,6 +30,7 @@ public:
     void    slotCreateServer();
 private slots:
 
+    void    slotdealfromMysql(QString);
     void threadFinished();
     void on_pushButton_stop_clicked();
 

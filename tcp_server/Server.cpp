@@ -93,9 +93,9 @@ void Server::updataClients(QString   msg,int length)
                  }
                     pro_anodizing = new  Protocol_Anodizing(sections);
 
-
+                     str = pro_anodizing->unpacklist();
                     //deal data
-
+                    emit  updataSQL(str);
                     //save data
 
                     //release
