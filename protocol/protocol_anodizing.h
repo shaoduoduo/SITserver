@@ -16,7 +16,7 @@ private:
 //特定接口对应的参数
 
     QStringList msglist;
-    QStringList anodize_Alarmlist;
+
 
 
 
@@ -24,6 +24,10 @@ private:
     char check;
 
 
+    QString packALARM(QStringList);
+    QString packANOD(QStringList);
+    QString packTC(QStringList);
+    QString packTEMP(QStringList);
 };
 
 #endif // PTOTOCOL_ANODIZING_H

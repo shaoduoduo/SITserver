@@ -72,14 +72,9 @@ void Server::updataClients(QString   msg,int length)
     QString str;
     //收到客户端上传数据
         emit    updataServer(msg,length);//service updata to mianwindow.cpp
-  //      qDebug()<<msg;
-    //"0,5,2019/8/24\t9:34:19\tDN\tDN19082409280001\t5\t0?"
+
      QStringList sections = msg.split(QRegExp("[,]")); //把每一个块装进一个QStringList中
-    // ANODIZE,//阳极氧化数据
-    // PLASMA,
-    // OPC,
-    // ARCSPRAY,
-    // OEE,
+
     if(sections.count()<PRO_SIZE)//包数量不足2
         return;
      switch (sections.at(PRO_INDEX).toInt())
@@ -95,6 +90,7 @@ void Server::updataClients(QString   msg,int length)
 
                      str = pro_anodizing->unpacklist();
                     //deal data
+                     if(str!=NULL)
                     emit  updataSQL(str);
                     //save data
 
