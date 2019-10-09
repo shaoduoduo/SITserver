@@ -65,6 +65,9 @@ void MainWindow::on_pushButton_stop_clicked()
 
          connect(server,SIGNAL(updataSQL(QString)),thread_mysql,SLOT(dealstrfromserver(QString)));
         connect(thread_mysql,SIGNAL(signalMySQL(QString)),this,SLOT(slotdealfromMysql(QString)));
+
+        connect(server,SIGNAL(updataMain(QString)),this,SLOT(updataMain(QString)));
+
             m_thread_sql.start();
              m_thread_server.start();
           //   m_thread_fileread.start();
@@ -175,4 +178,11 @@ void    MainWindow::updataServer(QString msg,int length)
 void    MainWindow::slotdealfromMysql(QString str)
 {
         ui->text_output->setText(str);
+}
+
+void    MainWindow::updataMain(QString str)
+{
+    QStringList list =str.split('/');
+    ui->text_output->setText(list.join(' '));
+
 }
