@@ -5,19 +5,22 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    thread_mysql = NULL;
+    server = NULL;
     ui->setupUi(this);
 
     m_pTimer = new QTimer(this);
     connect(m_pTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
-    m_pTimer->start(TIMER_TIMEOUT);
-
-
+    m_pTimer->start(TIMER_TIMEOUT_MAIN);
 
     port    =8888;
     ui->textEdit_port->setText(QString::number(port));
-
-
     Get_IP_Local();
+
+    starthread();
+//        slotCreateServer();//start server
+
+    ui->pushButton_start->setEnabled(false);
 
 }
 
@@ -33,10 +36,7 @@ MainWindow::~MainWindow()
     void MainWindow::threadFinished()
     {
 
-
     }
-
-
 //停止线程
 void MainWindow::on_pushButton_stop_clicked()
 {
@@ -56,8 +56,6 @@ void MainWindow::on_pushButton_stop_clicked()
   //       connect(this,SIGNAL(signalsendtoMysql(QString)),thread_mysql,SLOT(dealmesfrommain(QString)),Qt::QueuedConnection);
 
      #endif
-
-
          server  =   new Server(port);
          server->moveToThread(&m_thread_server);
          connect(&m_thread_server,&QThread::started,server,&Server::start);
@@ -65,8 +63,9 @@ void MainWindow::on_pushButton_stop_clicked()
 
          connect(server,SIGNAL(updataServer(QString,int) ),this,SLOT(updataServer(QString,int) ));
 
-
-             m_thread_sql.start();
+         connect(server,SIGNAL(updataSQL(QString)),thread_mysql,SLOT(dealstrfromserver(QString)));
+        connect(thread_mysql,SIGNAL(signalMySQL(QString)),this,SLOT(slotdealfromMysql(QString)));
+            m_thread_sql.start();
              m_thread_server.start();
           //   m_thread_fileread.start();
           //   m_thread_client.start();
@@ -168,8 +167,12 @@ void    MainWindow::updataServer(QString msg,int length)
 {
 
     //server 收到信息
-    ui->textBrowser_server->append(msg);
-    qDebug()<<"length === "<<length;
+    ui->textBrowser_server->append(msg.toUtf8().data());
+ //   qDebug()<<"length === "<<length;
 
 }
 
+void    MainWindow::slotdealfromMysql(QString str)
+{
+        ui->text_output->setText(str);
+}

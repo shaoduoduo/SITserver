@@ -69,6 +69,7 @@ enum PRO_INDEX_ANODIZE
     TEMPHIS,
     FILENUM,
     HEART,//心跳数据
+    SEND_MES,
 };
 
 enum PROTOCOL_INDEX
@@ -80,6 +81,16 @@ enum PROTOCOL_INDEX
     OEE,
 
     PROTOCOL_NUM
+};
+enum PROTOCOL
+{
+    PRO_INDEX,// PROTOCOL_INDEX
+    PRO_ID,     //
+    PRO_SIZE,
+    PRO_DATA,
+
+
+    PRO_NUM
 };
 //协议顺序
 //0               1:?   2                 3    4

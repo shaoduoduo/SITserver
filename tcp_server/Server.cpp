@@ -3,7 +3,7 @@
 Server::Server(int port)
 {
     listen(QHostAddress::Any,port);
-
+    Flag_receive =false;
 
 
 }
@@ -20,7 +20,17 @@ void Server::doWork()
 
     m_pTimer = new QTimer(this);
     connect(m_pTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
-    m_pTimer->start(TIMER_TIMEOUT);
+    m_pTimer->start(TIMER_TIMEOUT_SERVER);
+
+    if(Flag_receive==false)
+    {
+        //connect out
+
+    }
+    else {
+        //is connecting
+        Flag_receive =false;
+    }
 }
 
 void Server::start()
@@ -59,38 +69,38 @@ void    Server::incomingConnection(qintptr socketDescriptor)
 }
 void Server::updataClients(QString   msg,int length)
 {
-//收到客户端上传数据
-    emit    updataServer(msg,length);//service updata to mianwindow.cpp
-    qDebug()<<msg;
-//"0,5,2019/8/24\t9:34:19\tDN\tDN19082409280001\t5\t0?"
- QStringList sections = msg.split(QRegExp("[,]")); //把每一个块装进一个QStringList中
-// ANODIZE,//阳极氧化数据
-// PLASMA,
-// OPC,
-// ARCSPRAY,
-// OEE,
+    QString str;
+    //收到客户端上传数据
+        emit    updataServer(msg,length);//service updata to mianwindow.cpp
 
- switch (sections.at(0).toInt()) {
+     QStringList sections = msg.split(QRegExp("[,]")); //把每一个块装进一个QStringList中
 
- case ANODIZE://阳极氧化数据
-     if(sections.at(1).toInt()== HEART)
+    if(sections.count()<PRO_SIZE)//包数量不足2
+        return;
+     switch (sections.at(PRO_INDEX).toInt())
      {
-        //收到HEART包
+             case ANODIZE://阳极氧化数据
+                 if(sections.at(PRO_ID).toInt()== HEART)
+                 {
+                    //收到HEART包
+                        Flag_receive =true;
+                     break;
+                 }
+                    pro_anodizing = new  Protocol_Anodizing(sections);
 
-         break;
+                     str = pro_anodizing->unpacklist();
+                    //deal data
+                     if(str!=NULL)
+                    emit  updataSQL(str);
+                    //save data
+
+                    //release
+                    delete  pro_anodizing;
+                 break;
+
+             default:
+                 break;
      }
-        pro_anodizing = new  Protocol_Anodizing(sections);
-
-        //deal data
-
-        //save data
-
-        //release
-        delete  pro_anodizing;
-     break;
- default:
-     break;
- }
 }
 
 void    Server::slotDisconnected(int    descriptor)

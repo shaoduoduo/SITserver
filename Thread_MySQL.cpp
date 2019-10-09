@@ -49,7 +49,6 @@ void Thread_MySQL::start()
 
 
     if(MySQLFlag==false)
-
         return;
    //     db.open();
         QSqlQuery query(db);
@@ -95,4 +94,20 @@ void    Thread_MySQL::dealmesfrommain(QString s)
         if(m_pTimer->isActive()){
             m_pTimer->start();
         }
+    }
+
+    void    Thread_MySQL::dealstrfromserver(QString str)
+    {
+
+      //   qDebug()<<"dealstrfromclient 收到 "<<str;
+         emit   signalMySQL(str);
+
+        QSqlQuery query(db);
+
+            query.exec(str);
+         while(query.next()){
+             qDebug()<<query.value("msg").toString();
+        }
+
+
     }

@@ -56,4 +56,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    说明.txt
+    说明.txt \
+    mysql.txt
