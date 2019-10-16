@@ -3,7 +3,7 @@
 Server::Server(int port)
 {
     listen(QHostAddress::Any,port);
-    Flag_receive =false;
+    Flag_receive_ANOD =false;
 
 
 }
@@ -22,15 +22,7 @@ void Server::doWork()
     connect(m_pTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
     m_pTimer->start(TIMER_TIMEOUT_SERVER);
 
-    if(Flag_receive==false)
-    {
-        //connect out
 
-    }
-    else {
-        //is connecting
-        Flag_receive =false;
-    }
 }
 
 void Server::start()
@@ -83,7 +75,7 @@ void Server::updataClients(QString   msg,int length)
                  if(sections.at(PRO_ID).toInt()== HEART)
                  {
                     //收到HEART包
-                        Flag_receive =true;
+                        Flag_receive_ANOD =true;
                      break;
                  }
                     pro_anodizing = new  Protocol_Anodizing(sections);
@@ -127,6 +119,17 @@ void Server::handleTimeout()
 
     if(m_pTimer->isActive()){
         m_pTimer->start();
+    }
+
+    if(Flag_receive_ANOD==false)
+    {
+        //connect out
+            updataMain("anodize/outline");
+    }
+    else {
+        //is connecting
+        Flag_receive_ANOD =false;
+         updataMain("anodize/inline");
     }
 }
 

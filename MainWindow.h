@@ -43,7 +43,7 @@ private slots:
 //tcp server
 
     void    updataServer(QString,int);
-
+    void    updataMain(QString);
 private:
     Ui::MainWindow *ui;
     MoveToThreadTest    *   m_pMoveThread ;

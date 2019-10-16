@@ -8,7 +8,7 @@ QT       += core gui
 QT += network
 QT       += core gui widgets
 QT += sql
-
+QT +=core network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = server_code
@@ -35,7 +35,8 @@ SOURCES += \
         protocol/protocol.cpp \
         protocol/protocol_anodizing.cpp \
         tcp_server/Server.cpp \
-        tcp_server/TcpClientSocket.cpp
+        tcp_server/TcpClientSocket.cpp \
+    mqtt/MQTTClient.cpp
 
 HEADERS += \
         MainWindow.h \
@@ -45,7 +46,8 @@ HEADERS += \
         protocol/protocol_anodizing.h \
         protocol/protocol_list.h \
         tcp_server/Server.h \
-        tcp_server/TcpClientSocket.h
+        tcp_server/TcpClientSocket.h \
+    mqtt/MQTTClient.h
 
 FORMS += \
         MainWindow.ui
@@ -57,4 +59,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     说明.txt \
-    mysql.txt
+    mysql.txt \
+    服务器端程序.txt

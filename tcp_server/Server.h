@@ -9,7 +9,7 @@
 #include "protocol/protocol_anodizing.h"
 #include    <QTimer>
 #include    <QThread>
-#define  TIMER_TIMEOUT_SERVER  8000
+#define  TIMER_TIMEOUT_SERVER  (0.7*1000)
 class Server : public QTcpServer
 {
     Q_OBJECT
@@ -22,6 +22,7 @@ public:
 signals:
     void    updataServer(QString,int);
     void    updataSQL(QString);
+    void    updataMain(QString);
 private:
     Protocol_Anodizing * pro_anodizing;
     QTimer *m_pTimer;//定时器
@@ -37,7 +38,7 @@ public slots:
 
 protected:
     void    incomingConnection(qintptr  socketDescriptor);
-    bool    Flag_receive;
+    bool    Flag_receive_ANOD;//
 };
 
 #endif // SERVER_H
