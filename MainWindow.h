@@ -13,6 +13,7 @@
 #include <QHostAddress>
 #include    <tcp_server/Server.h>
 
+#include    <mqtt/MQTTClient.h>
 namespace Ui {
 class MainWindow;
 }
@@ -51,6 +52,9 @@ private:
 
     Thread_MySQL        *thread_mysql;
     QThread     m_thread_sql;
+
+    ThreadMQTTClient        *thread_MQTT;
+    QThread     m_thread_mqtt;
 
 
     QTimer *m_pTimer;//定时器

@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     thread_mysql = NULL;
     server = NULL;
+    thread_MQTT =NULL;
+
     ui->setupUi(this);
 
     m_pTimer = new QTimer(this);
@@ -30,6 +32,7 @@ MainWindow::~MainWindow()
 
         delete      thread_mysql;
         delete      server;
+        delete      thread_MQTT;
         delete      m_pTimer;
         delete      ui;
 }
@@ -62,14 +65,19 @@ void MainWindow::on_pushButton_stop_clicked()
          connect(&m_thread_server,&QThread::finished,server,&Server::deleteLater);
 
          connect(server,SIGNAL(updataServer(QString,int) ),this,SLOT(updataServer(QString,int) ));
-
          connect(server,SIGNAL(updataSQL(QString)),thread_mysql,SLOT(dealstrfromserver(QString)));
         connect(thread_mysql,SIGNAL(signalMySQL(QString)),this,SLOT(slotdealfromMysql(QString)));
-
         connect(server,SIGNAL(updataMain(QString)),this,SLOT(updataMain(QString)));
+
+        thread_MQTT =new ThreadMQTTClient();
+        thread_MQTT->moveToThread(&m_thread_mqtt);
+        connect(&m_thread_mqtt,&QThread::started,thread_MQTT,&ThreadMQTTClient::start);
+        connect(&m_thread_mqtt,&QThread::finished,thread_MQTT,&ThreadMQTTClient::deleteLater);
+
 
             m_thread_sql.start();
              m_thread_server.start();
+             m_thread_mqtt.start();
           //   m_thread_fileread.start();
           //   m_thread_client.start();
  }
@@ -88,10 +96,18 @@ void MainWindow::on_pushButton_stop_clicked()
      if(server)
          {
          qDebug() << "线程有效，关闭线程server " ;
-//         server ->stop();
+         server ->stop();
          m_thread_server.quit();
          m_thread_server.wait();
          server = NULL;
+     }
+     if(thread_MQTT)
+     {
+         qDebug() << "线程有效，关闭线程thread_MQTT" ;
+         thread_MQTT->stop();
+         m_thread_mqtt.quit();
+         m_thread_mqtt.wait();
+         thread_MQTT= NULL;
      }
  }
 
@@ -108,11 +124,11 @@ void MainWindow::on_pushButton_stop_clicked()
 
     void MainWindow::handleTimeout()
     {
-//        QString msg = QString("%1 -> %2 threadid:[%3]")
-//                .arg(__FILE__)
-//                .arg(__FUNCTION__)
-//                .arg((uintptr_t)QThread::currentThreadId());
-//        qDebug() << msg;
+        QString msg = QString("%1 -> %2 threadid:[%3]")
+                .arg(__FILE__)
+                .arg(__FUNCTION__)
+                .arg((uintptr_t)QThread::currentThreadId());
+        qDebug() << msg;
 
         if(m_pTimer->isActive()){
             m_pTimer->start();
@@ -153,7 +169,7 @@ void MainWindow::Get_IP_Local(void)//get ip local
 //    QList<QHostAddress>listAddress =    hostInfo.addresses();
 //    if(!listAddress.isEmpty())
 //    {
-           ui->label_IP->setText(hostInfo.addresses().at(5).toString());
+           ui->label_IP->setText(hostInfo.addresses().at(3).toString());
 //    }
 }
 
