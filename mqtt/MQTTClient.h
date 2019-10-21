@@ -6,6 +6,8 @@
 #include <QTimer>
 #include <QString>
 #include <QDebug>
+#include <QtMqtt/QMqttClient>
+
 #define TIMER_TIMEOUT 5000
 
 class ThreadMQTTClient : public QObject

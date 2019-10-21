@@ -3,7 +3,7 @@
 ThreadMQTTClient::ThreadMQTTClient(QObject *parent) : QObject(parent)
 {
 
-
+ //QMQTT::Client *client = new QMQTT::Client("m1.smartbow.cn", 1883,ssl_config);
 }
 
 ThreadMQTTClient::~ThreadMQTTClient()
