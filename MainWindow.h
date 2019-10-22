@@ -41,6 +41,10 @@ private slots:
     void on_pushButton_connect_clicked();
     void on_pushButton_send_clicked();
 
+
+
+
+
 //tcp server
 
     void    updataServer(QString,int);

@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_pTimer = new QTimer(this);
     connect(m_pTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
-    m_pTimer->start(TIMER_TIMEOUT_MAIN);
+ //   m_pTimer->start(TIMER_TIMEOUT_MAIN);
 
     port    =8888;
     ui->textEdit_port->setText(QString::number(port));
@@ -76,7 +76,7 @@ void MainWindow::on_pushButton_stop_clicked()
         connect(&m_thread_mqtt,&QThread::finished,thread_MQTT,&ThreadMQTTClient::deleteLater);
 
 
-            m_thread_sql.start();
+           // m_thread_sql.start();
              m_thread_server.start();
              m_thread_mqtt.start();
           //   m_thread_fileread.start();
@@ -203,3 +203,7 @@ void    MainWindow::updataMain(QString str)
     ui->text_output->setText(list.join(' '));
 
 }
+
+
+
+

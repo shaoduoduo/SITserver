@@ -7,6 +7,8 @@
 #include <QString>
 #include <QDebug>
 #include <QtMqtt/QMqttClient>
+#include <QtMqtt/QtMqtt>
+#include    <protocol/protocol.h>
 
 #define TIMER_TIMEOUT 5000
 
@@ -27,9 +29,18 @@ signals:
 
 public slots:
 
-void    handleTimeout();  //定时器超时处理函数
+        void    handleTimeout();  //定时器超时处理函数
+        void updateLogStateChange();
+        void brokerDisconnected();
+        void mqttmessageReceived(const QByteArray &message, const QMqttTopicName &topic);
+        void pingrecieve();
+        void connecttohost();
 
+        void slotPublish();
+        void slotSubscribe();
 
+private:
+    QMqttClient *m_client;
 
 };
 #endif // MQTTCLIENT_H
