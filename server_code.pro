@@ -9,6 +9,9 @@ QT += network
 QT       += core gui widgets
 QT += sql
 QT +=core network
+QT +=mqtt
+QT +=core
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = server_code
@@ -19,7 +22,7 @@ TEMPLATE = app
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
-
+DEFINES += QT_MESSAGELOGCONTEXT
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
@@ -36,7 +39,9 @@ SOURCES += \
         protocol/protocol_anodizing.cpp \
         tcp_server/Server.cpp \
         tcp_server/TcpClientSocket.cpp \
-    mqtt/MQTTClient.cpp
+    MQTTClient/MQTTClie.cpp \
+    readconfig.cpp \
+    logfile.cpp
 
 HEADERS += \
         MainWindow.h \
@@ -47,7 +52,9 @@ HEADERS += \
         protocol/protocol_list.h \
         tcp_server/Server.h \
         tcp_server/TcpClientSocket.h \
-    mqtt/MQTTClient.h
+    MQTTClient/MQTTClie.h \
+    readconfig.h \
+    logfile.h
 
 FORMS += \
         MainWindow.ui
@@ -60,4 +67,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     说明.txt \
     mysql.txt \
-    服务器端程序.txt
+    服务器端程序.txt \
+    ../build-server_code-Desktop_Qt_5_11_0_GCC_64bit-Release/config.ini \
+    ../build-server_code-Desktop_Qt_5_11_0_GCC_64bit-Release/config.ini
+INCLUDEPATH +=$$PWD/include

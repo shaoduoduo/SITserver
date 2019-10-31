@@ -1,7 +1,7 @@
 #ifndef PTOTOCOL_ANODIZING_H
 #define PTOTOCOL_ANODIZING_H
 #include "protocol.h"
-#include    <qDebug>
+#include    <QDebug>
 
 //专用封装类。用于封装特定接口，增加特定参数属性
 

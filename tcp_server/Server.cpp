@@ -4,14 +4,11 @@ Server::Server(int port)
 {
     listen(QHostAddress::Any,port);
     Flag_receive_ANOD =false;
-
-
 }
 
 Server::~Server()
 {
-
-    delete m_pTimer;
+ //   delete m_pTimer;
 }
 
 void Server::doWork()
