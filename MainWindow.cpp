@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     server = NULL;
     thread_mqtt = NULL;
 
+    RabbitmqClient rabbit;
+
     //timer
     m_pTimer = new QTimer(this);
     connect(m_pTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));

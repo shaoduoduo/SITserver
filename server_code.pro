@@ -41,7 +41,8 @@ SOURCES += \
         tcp_server/TcpClientSocket.cpp \
     MQTTClient/MQTTClie.cpp \
     readconfig.cpp \
-    logfile.cpp
+    logfile.cpp \
+    librabbitmq/RabbitmqClient.cpp
 
 HEADERS += \
         MainWindow.h \
@@ -54,7 +55,8 @@ HEADERS += \
         tcp_server/TcpClientSocket.h \
     MQTTClient/MQTTClie.h \
     readconfig.h \
-    logfile.h
+    logfile.h \
+    librabbitmq/RabbitmqClient.h
 
 FORMS += \
         MainWindow.ui
@@ -69,5 +71,22 @@ DISTFILES += \
     mysql.txt \
     服务器端程序.txt \
     ../build-server_code-Desktop_Qt_5_11_0_GCC_64bit-Release/config.ini \
-    ../build-server_code-Desktop_Qt_5_11_0_GCC_64bit-Release/config.ini
+    ../build-server_code-Desktop_Qt_5_11_0_GCC_64bit-Release/config.ini \
+    ../build-server_code-Desktop_Qt_5_11_0_GCC_64bit-Release/python/pythonstart.py
 INCLUDEPATH +=$$PWD/include
+
+unix:!macx: LIBS += -L$$PWD/librabbitmq/ -lrabbitmq
+
+INCLUDEPATH += $$PWD/librabbitmq
+DEPENDPATH += $$PWD/librabbitmq
+
+LIBS+=-ldl
+
+LIBS+=-lutil
+
+unix:!macx: LIBS += -L$$PWD/../../../../usr/local/python3Dir/lib/ -lpython3.6m
+
+INCLUDEPATH += $$PWD/../../../../usr/local/python3Dir/include/python3.6m
+DEPENDPATH += $$PWD/../../../../usr/local/python3Dir/include/python3.6m
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../../../../usr/local/python3Dir/lib/libpython3.6m.a

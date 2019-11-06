@@ -17,6 +17,7 @@
 #include <readconfig.h>
 #include <logfile.h>
 
+#include "RabbitmqClient.h"
 
 namespace Ui {
 class MainWindow;
