@@ -7,6 +7,10 @@
 #include <QMutex>
 #include <QDebug>
 #include <QTimer>
+#include <QString>
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 
 
 class RabbitmqClient : public QObject

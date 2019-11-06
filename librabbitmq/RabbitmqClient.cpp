@@ -17,13 +17,33 @@ RabbitmqClient::RabbitmqClient()
             return;
         }
 
-        PyObject* pFunHello = PyObject_GetAttrString(pModule,"hello");
+        PyObject* pFunHello = PyObject_GetAttrString(pModule,"test2");
         if (!pFunHello) {
             qDebug("get function hello failed");
             return;
         }
 
-        PyObject_CallFunction(pFunHello,NULL);
+//        PyObject *pArgs=
+
+        PyObject* pFunRes=  PyObject_CallFunction(pFunHello,NULL);
+
+
+
+        int res_int;
+        char* res_char;
+      PyArg_Parse(pFunRes,"s",&res_char);
+//      res_char = PyBytes_AsString(pFunRes);
+//        res_char = PyByteArray_AsString(pFunRes);
+
+        std::cout<<res_char<<"\r\n";
+//        qDebug()<<res_str;
+//        qDebug()<<res_int;
+        qDebug()<<QString::fromLatin1(res_char);
+        Py_DECREF(pFunRes);
+        if (!pFunRes) {
+            qDebug("cal function  failed");
+            return;
+        }
 
 }
 RabbitmqClient::~RabbitmqClient()
